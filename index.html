@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="App">
+    <head>
+        <meta charset="utf-8">
+        <title>Angular Example</title>
+        <style rel="stylesheet" href="/style.css"></style>
+        <link rel="stylesheet" href="./node_modules/angular-datatables/dist/css/angular-datatables.min.css">    
+    </head>
+    <body>
+        <div class="tableClass" ng-controller="WithOptionsCtrl as showCase">
+            <table datatable="" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="row-border hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Foo</td>
+                    <td>Bar</td>
+                </tr>
+                <tr>
+                    <td>123</td>
+                    <td>Someone</td>
+                    <td>Youknow</td>
+                </tr>
+                <tr>
+                    <td>987</td>
+                    <td>Iamout</td>
+                    <td>Ofinspiration</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+    <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>   
+    <script type="text/javascript" src="./node_modules/datatables.net/js/jquery.dataTables.js"></script>    
+    <script type="text/javascript" src="./node_modules/angular/angular.min.js"></script>         
+    <script type="text/javascript" src="./node_modules/angular-datatables/dist/angular-datatables.min.js"></script>    
+    <script type="text/javascript" src="./app.js"></script>
+</html>
