@@ -3,42 +3,112 @@
     <head>
         <meta charset="utf-8">
         <title>Angular Example</title>
-        <style rel="stylesheet" href="/style.css"></style>
-        <link rel="stylesheet" href="./node_modules/angular-datatables/dist/css/angular-datatables.min.css">    
+        <link rel="stylesheet" href="style.css"></link>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        <link rel="stylesheet" href="./node_modules/angular-datatables/dist/css/angular-datatables.min.css"> 
+        
     </head>
-    <body>
-        <div class="tableClass" ng-controller="WithOptionsCtrl as showCase">
-            <table datatable="" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="row-border hover">
+    <body ng-controller="mainController">
+        <div class="tableClass" >
+            <table datatable="" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="row-border hover">
                 <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                </tr>
+                    <tr>
+                        <th></th>
+                        <th>Interface</th>
+                        <th>Speed</th>
+                        <th>Bandwidth</th>
+                        <th>Port type</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Foo</td>
-                    <td>Bar</td>
-                </tr>
-                <tr>
-                    <td>123</td>
-                    <td>Someone</td>
-                    <td>Youknow</td>
-                </tr>
-                <tr>
-                    <td>987</td>
-                    <td>Iamout</td>
-                    <td>Ofinspiration</td>
-                </tr>
+                    <tr ng-repeat-start="a in data">
+                        <td ng-click="toggleHiddenRow(a.interface)"><i style="color: green" class="fas fa-plus-circle"></i></td>
+                        <td>{{a.interface}}</td>
+                        <td>{{a.speed}}</td>
+                        <td>{{a.bandwidth}}</td>
+                        <td>{{a.port_type}} {{selectedRow}}</td>
+                        <td ng-click="editModal(a)"><i style="color: tomato;" class="fas fa-edit"></i></td>   
+                    </tr>
+                    <tr ng-repeat-end ng-show="activeRow == a.interface">
+                        <td colspan="6">
+                            <div class="subTable">
+                                <table id="table_id" class="display">
+                                    <thead>
+                                        <tr>
+                                            <th></th>                        
+                                            <th>VLAN name</th>
+                                            <th>VLAN number</th>
+                                            <th>Speed</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        <tbody>
+                                            <tr ng-repeat="a in data">
+                                                <td></td>
+                                                <td>{{a.sub.vlan_name}}</td>
+                                                <td>{{a.sub.vlan_number}}</td>
+                                                <td>{{a.sub.speed}}</td>
+                                                <td><i class="fas fa-edit" style="color: tomato"></i></td>                                        
+                                            </tr>
+                                        </tbody>
+                                    </thead>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>  
                 </tbody>
             </table>
         </div>
+
+
+        <!-- Modal -->
+        <div class="modal" id="editModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Interface</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{values.interface}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Speed</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="{{values.speed}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Bandwidth</label>
+                            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="{{values.bandwidth}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Port type</label>
+                            <input type="password" class="form-control" id="exampleInputPassword3" placeholder="{{values.port_type}}">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+                </div>
+            </div>
+        </div>
     </body>
+
     <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>   
     <script type="text/javascript" src="./node_modules/datatables.net/js/jquery.dataTables.js"></script>    
     <script type="text/javascript" src="./node_modules/angular/angular.min.js"></script>         
     <script type="text/javascript" src="./node_modules/angular-datatables/dist/angular-datatables.min.js"></script>    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
     <script type="text/javascript" src="./app.js"></script>
+
 </html>

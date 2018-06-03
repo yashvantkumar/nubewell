@@ -1,3 +1,12 @@
 .tableClass {
-    width: 70%; 
+    width: 80%;
+    padding-left: 350px;
+}
+
+.expandButton {
+    border-radius: 999px; 
+}
+
+.tableClass {
+    text-align: center;
 }
