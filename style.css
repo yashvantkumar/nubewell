@@ -1,5 +1,6 @@
 .tableClass {
-    width: 100%;
+    width: 80%;
+    margin-left: 125px;
     padding-top: 50px;
     text-align: center;    
 }
@@ -11,4 +12,8 @@
 .subTable {
     width: 80%;  
     margin-left: 100px; 
+}
+
+.buttons {
+
 }
