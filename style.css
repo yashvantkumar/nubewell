@@ -1,12 +1,14 @@
 .tableClass {
-    width: 80%;
-    padding-left: 350px;
+    width: 100%;
+    padding-top: 50px;
+    text-align: center;    
 }
 
 .expandButton {
     border-radius: 999px; 
 }
 
-.tableClass {
-    text-align: center;
+.subTable {
+    width: 80%;  
+    margin-left: 100px; 
 }

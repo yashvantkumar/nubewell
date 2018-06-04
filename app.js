@@ -18,90 +18,20 @@ App.controller('mainController', ['$scope', 'DTOptionsBuilder', 'DTColumnDefBuil
         $scope.toggleHiddenRow = function(id){
             $scope.activeRow = id;
         }; 
-        $scope.dtOptions = DTOptionsBuilder.newOptions()
-            .withPaginationType('full_numbers')
-            .withDisplayLength(2)
-            .withDOM('pitrfl');
+
+        $scope.dtOptions = DTOptionsBuilder.newOptions().withPaginationType('full_numbers');
+
         $scope.dtColumnDefs = [
             DTColumnDefBuilder.newColumnDef(0),
-            DTColumnDefBuilder.newColumnDef(2).notSortable()
+            DTColumnDefBuilder.newColumnDef(1),
+            DTColumnDefBuilder.newColumnDef(2),
+            DTColumnDefBuilder.newColumnDef(3),
+            DTColumnDefBuilder.newColumnDef(4),
+            DTColumnDefBuilder.newColumnDef(5)
         ];
 
         $scope.editModal = (a) => {
-            $('#editModal').modal({});
             $scope.values = a;
         }
     }
 ]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// angular.module('App')
-//     .controller('mainController', ['$scope', 'datatables',
-//         function($scope, datatables) {
-
-//         var data = "roger";
-//         var name;
-//         var vm = this;
-//         $scope.name = "hello"
-//         $scope.data = "world";
-//         vm.dtOptions = DTOptionsBuilder.newOptions()
-//             .withPaginationType('full_numbers')
-//             .withDisplayLength(3)
-//             .withDOM('pitrfl');
-//             vm.dtColumnDefs = [
-//             DTColumnDefBuilder.newColumnDef(0),
-//             // DTColumnDefBuilder.newColumnDef(1).notVisible(),
-//             DTColumnDefBuilder.newColumnDef(2).notSortable()
-//         ];
-//         vm.openModel = function() {
-//             console.log(hello)
-//         }
-// }]);
-
-// // angular.module("main", ['datatables']).controller('mainController', mainController);
-

@@ -2,7 +2,7 @@
   "name": "nubewell",
   "version": "1.0.0",
   "description": "Working on datatables",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.10",
-    "angular-datatables": "^0.6.2"
+    "angular-datatables": "^0.6.2",
+    "express": "^4.16.3"
   }
 }

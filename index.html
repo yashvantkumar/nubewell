@@ -10,9 +10,47 @@
         
     </head>
     <body ng-controller="mainController">
-        <div class="tableClass" >
-            <table datatable="" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="row-border hover">
+        <div class="tableClass">
+        <form class="form-inline" ng-submit="">
+            <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="row-border hover">
                 <thead>
+                    <tr>
+                        <th>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <label>
+                                    <input class="form-control" type="number" name="id" value="">
+                                </label>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <label>
+                                    <input class="form-control" type="number" name="id" value="">
+                                </label>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <label>
+                                    <input type="text" class="form-control" name="firstName"  value="">
+                                </label>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <label>
+                                    <input type="text" class="form-control" name="lastName" value="">
+                                </label>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i></button>
+                            </div>
+                        </th>
+                    </tr>
                     <tr>
                         <th></th>
                         <th>Interface</th>
@@ -23,51 +61,58 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat-start="a in data">
-                        <td ng-click="toggleHiddenRow(a.interface)"><i style="color: green" class="fas fa-plus-circle"></i></td>
-                        <td>{{a.interface}}</td>
-                        <td>{{a.speed}}</td>
-                        <td>{{a.bandwidth}}</td>
-                        <td>{{a.port_type}} {{selectedRow}}</td>
-                        <td ng-click="editModal(a)"><i style="color: tomato;" class="fas fa-edit"></i></td>   
-                    </tr>
-                    <tr ng-repeat-end ng-show="activeRow == a.interface">
-                        <td colspan="6">
-                            <div class="subTable">
-                                <table id="table_id" class="display">
-                                    <thead>
-                                        <tr>
-                                            <th></th>                        
-                                            <th>VLAN name</th>
-                                            <th>VLAN number</th>
-                                            <th>Speed</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                        <tbody>
-                                            <tr ng-repeat="a in data">
-                                                <td></td>
-                                                <td>{{a.sub.vlan_name}}</td>
-                                                <td>{{a.sub.vlan_number}}</td>
-                                                <td>{{a.sub.speed}}</td>
-                                                <td><i class="fas fa-edit" style="color: tomato"></i></td>                                        
-                                            </tr>
-                                        </tbody>
-                                    </thead>
-                                </table>
-                            </div>
+                    <tr ng-repeat-start="d in data">
+                        <td ng-click="toggleHiddenRow(d.interface)"><i style="color: green" class="fas fa-plus-circle"></i></td>
+                        <td>{{ d.interface }}</td>
+                        <td>{{ d.speed }}</td>
+                        <td>{{ d.bandwidth }}</td>
+                        <td>{{ d.port_type }}</td>
+                        <td>
+                            <button type="button" ng-click="editModal(d)" style="font-size: 10px;" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></button>
+                            <button type="button" style="font-size: 10px;" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
                         </td>
-                    </tr>  
+                    </tr>
+                    <tr ng-repeat-end ng-show="activeRow == d.interface">
+                            <td colspan="5">
+                                <div >
+                                    <table class="subTable" id="table_id" class="display">
+                                        <thead>
+                                            <tr>
+                                                <th></th>                        
+                                                <th>VLAN name</th>
+                                                <th>VLAN number</th>
+                                                <th>Speed</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                            <tbody>
+                                                <tr ng-repeat="a in data">
+                                                    <td><i style="color: green" class="fas fa-plus-circle"></i></td>
+                                                    <td>{{a.sub.vlan_name}}</td>
+                                                    <td>{{a.sub.vlan_number}}</td>
+                                                    <td>{{a.sub.speed}}</td>
+                                                    <td>
+                                                        <button type="button" style="font-size: 10px;" class="btn btn-warning btn-sm"><i class="far fa-edit"></i></button>
+                                                        <button type="button" style="font-size: 10px;" class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                                                    </td>                                      
+                                                </tr>
+                                            </tbody>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>  
                 </tbody>
             </table>
+        </form>
         </div>
 
 
         <!-- Modal -->
-        <div class="modal" id="editModal" tabindex="-1" role="dialog">
+        <div class="modal fade bd-example-modal-lg" id="editModal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Edit</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
